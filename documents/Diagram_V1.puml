@@ -1,0 +1,83 @@
+@startuml title Tapmenu
+
+entity User{ 
+    * email (String) <<PK>>
+    --
+    * username (String)
+    * whatsapp_number (String)
+    * password (String)
+    * address (String)
+    * role (Set) Default 0
+    * token (String)
+    * created_at (Datetime)
+}
+
+entity Dataset{
+    * Id (string) <<PK>>
+    * Id_user (string) <<FK>>
+    * Id_product (string) <<FK>>
+    * Id_element (string) <<FK>>
+    --
+    * Name (string)
+    * created_at (Datetime)
+
+}
+
+entity Product{
+    * Id (string) <<PK>>
+    --
+    * Image (string)
+    * Title (string)
+    * Description (string)
+    * Price (number)
+    * Click (number)
+    * Qty (number)
+    * Status (boolean)
+    * Type (string)
+    * created_at (Datetime)
+
+}
+
+entity Screen{
+    * Id (string) <<PK>>
+    * Id_page (string) <<FK>>
+    --
+    * Name (string)
+    * Endpoint (string)
+    * created_at (Datetime)
+}
+
+entity Page{
+    * Id (string) <<PK>>
+    * Id_element (string) <<FK>>
+    --
+    * Name (string)
+    * Endpoint (string)
+    * created_at (Datetime)
+}
+
+
+
+entity Element{
+    * Id (string) <<PK>>
+    --
+    * Type (string)
+    * Content (JSON)
+    * Properties (JSON)
+    * Style (JSON)
+}
+
+entity Element_Dataset {
+    * Id_element (string) <<FK>>
+    * Id_dataset (string) <<FK>>
+}
+
+User ||--o{ Dataset
+User ||--o{ Screen
+Dataset ||--o{ Product
+Screen ||--o{ Page
+Page ||--o{ Element
+Element ||--o{ Element_Dataset
+Dataset ||--o{ Element_Dataset
+
+@enduml
