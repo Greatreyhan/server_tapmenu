@@ -1,0 +1,22 @@
+{
+  "name": "server_tapmenu",
+  "version": "1.0.0",
+  "description": "server for tapmenu",
+  "main": "./src/index.tsx",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Greatreyhan/server_tapmenu.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "greatreyhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Greatreyhan/server_tapmenu/issues"
+  },
+  "homepage": "https://github.com/Greatreyhan/server_tapmenu#readme"
+}
