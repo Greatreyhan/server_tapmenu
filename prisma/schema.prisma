@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ProductType {
+  FOOD
+  BEVERAGES
+  SNACK
+  DESSERTS
+  OTHER
+}
+
+model User{
+  email String @id @db.VarChar(100)
+  password String @db.VarChar(100)
+  username String @db.VarChar(100)
+  role Role @default(USER)
+  address String? @db.VarChar(255)
+  token String? @db.VarChar(255)
+  whatsapp_number String? @db.VarChar(50)
+  created_at DateTime @default(now())
+
+  datasets Dataset[]
+  screens Screen[]
+
+  @@map("users")
+}
+
+model Dataset{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  created_at DateTime @default(now())
+
+  id_user String
+  user User @relation(fields: [id_user], references: [email])
+
+  products Product[]
+
+  elemets DatasetsOnElements[]
+
+  @@map("datasets")
+}
+
+model Product{
+  id Int @id @default(autoincrement())
+  image String @db.VarChar(255)
+  title String @db.VarChar(100)
+  description String @db.VarChar(255)
+  price Int
+  click Int @default(0)
+  qty Int @default(0)
+  status Boolean @default(true)
+  type ProductType
+  created_at DateTime @default(now())
+
+  id_dataset Int
+  dataset Dataset @relation(fields: [id_dataset], references: [id])
+
+  @@map("products")
+}
+
+model Screen{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  endpoint String @db.VarChar(255)
+  created_at DateTime @default(now())
+
+  id_user String
+  user User @relation(fields: [id_user], references: [email])
+
+  pages Page[]
+
+  @@map("screens")
+}
+
+model Page{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  endpoint String @db.VarChar(255)
+  created_at DateTime @default(now())
+
+  id_screen Int
+  screen Screen @relation(fields: [id_screen], references: [id])
+
+  elemets Element[]
+
+  @@map("pages")
+}
+
+model Element{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  type String @db.VarChar(100)
+  content Json?
+  properties Json?
+  style Json?
+  created_at DateTime @default(now())
+
+  id_page Int
+  page Page @relation(fields: [id_page], references: [id])
+
+  dataset DatasetsOnElements[]
+
+  @@map("elements")
+}
+
+model DatasetsOnElements{
+  id_dataset Int
+  dataset Dataset @relation(fields: [id_dataset], references: [id])
+  id_element Int
+  element Element @relation(fields: [id_element], references: [id])
+  assigned_at DateTime @default(now())
+
+  @@id([id_dataset,id_element])
+}

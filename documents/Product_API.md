@@ -208,3 +208,77 @@ Response Error:
     "data":{}
 }
 ```
+
+## Search List Product
+
+Endpoint : GET /api/datasets/:id_dataset/products
+
+Request Header:
+- API-TOKEN
+
+Query Parameter:
+- title : string
+- description: string
+- price : max & min
+- click : max & min
+- qty : max & min
+- status : true & false
+- type : string
+
+Response Body:
+```json
+{
+    "status":"OK",
+    "message":"Success Get Product",
+    "data":[
+        {
+            "id":"a3r2dfsaer3ww",
+            "image" : "link",
+            "title" : "test",
+            "description" : "test",
+            "price" : 1000,
+            "click" : 100,
+            "qty" : 10,
+            "status" : true,
+            "type" : "makanan"
+        },
+        {
+            "id":"a3r2dfsaer3ww",
+            "image" : "link",
+            "title" : "test",
+            "description" : "test",
+            "price" : 1000,
+            "click" : 100,
+            "qty" : 10,
+            "status" : true,
+            "type" : "makanan"
+        },
+        {
+            "id":"a3r2dfsaer3ww",
+            "image" : "link",
+            "title" : "test",
+            "description" : "test",
+            "price" : 1000,
+            "click" : 100,
+            "qty" : 10,
+            "status" : true,
+            "type" : "makanan"
+        }
+    ],
+        "paging":{
+            "current_page": 1,
+            "total_page":10,
+            "size":10
+        }
+}
+
+```
+
+Response Error:
+```json
+{
+    "status":"Failed",
+    "message":"Token Invalid",
+    "data":{}
+}
+```

@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Greatreyhan/server_tapmenu#readme",
   "dependencies": {
+    "@prisma/client": "^5.22.0",
     "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1",
     "express": "^4.21.1",
