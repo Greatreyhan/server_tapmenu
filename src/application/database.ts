@@ -24,14 +24,14 @@ export const prismaClient = new PrismaClient({
 });
 
 prismaClient.$on("error", (e)=>{
-    logger.error(e)
+    console.info(e)
 })
-prismaClient.$on("warn", (e)=>{
-    logger.error(e)
-})
-prismaClient.$on("info", (e)=>{
-    logger.error(e)
-})
-prismaClient.$on("query", (e)=>{
-    logger.error(e)
-})
+// prismaClient.$on("warn", (e)=>{
+//     logger.error(e)
+// })
+// prismaClient.$on("info", (e)=>{
+//     logger.error(e)
+// })
+// prismaClient.$on("query", (e)=>{
+//     logger.error(e)
+// })
