@@ -124,6 +124,5 @@ describe("GET /api/datasets", () =>{
         
         console.info(response.body)
         expect(response.status).toBe(200)
-        // expect(response.body.data.name).toBe("Test1")
     })
 })

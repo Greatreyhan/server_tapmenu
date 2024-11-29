@@ -1,3 +1,4 @@
+import { Dataset, Product } from "@prisma/client";
 import { prismaClient } from "../src/application/database";
 import bcrypt from "bcrypt"
 export class UserTest{
@@ -22,7 +23,6 @@ export class UserTest{
             }
         })
     }
-
 }
 
 export class DatasetTest{
@@ -44,7 +44,7 @@ export class DatasetTest{
         })
     }
 
-    static async get(){
+    static async get(): Promise<Dataset>{
         const dataset = await prismaClient.dataset.findFirst({
             where:{
                 id_user: "test@gmail.com",
@@ -53,6 +53,55 @@ export class DatasetTest{
 
         if(!dataset){
             throw new Error("Dataset not found!")
+        }
+
+        return dataset;
+    }
+
+}
+
+export class ProductTest{
+
+    static async delete(){
+
+        await prismaClient.product.deleteMany({
+            where:{
+                dataset:{
+                    id_user: "test@gmail.com"
+                }
+            }
+        })
+
+    }
+
+    static async create(){
+        const dataset = await DatasetTest.get()
+        await prismaClient.product.create({
+            data:{
+                id_dataset: dataset.id,
+                image: "link",
+                title: "test",
+                description: "test",
+                price: 1000,
+                click: 100,
+                qty: 10,
+                status: true,
+                type: "FOOD",
+            }
+        })
+    }
+
+    static async get(): Promise<Product>{
+        const dataset = await prismaClient.product.findFirst({
+            where:{
+                dataset:{
+                    id_user: "test@gmail.com"
+                }
+            }
+        });
+
+        if(!dataset){
+            throw new Error("Product not found!")
         }
 
         return dataset;

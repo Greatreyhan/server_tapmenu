@@ -2,6 +2,7 @@ import express from "express"
 import { authMiddleware } from "../middleware/auth-middleware";
 import { UserController } from "../controller/user-controller";
 import { DatasetController } from "../controller/dataset-controller";
+import { ProductController } from "../controller/product-controller";
 
 export const privateRouter = express.Router();
 privateRouter.use(authMiddleware);
@@ -18,3 +19,11 @@ privateRouter.get("/api/datasets/:id_dataset(\\d+)", DatasetController.get);
 privateRouter.patch("/api/datasets/:id_dataset(\\d+)", DatasetController.update);
 privateRouter.delete("/api/datasets/:id_dataset(\\d+)", DatasetController.remove);
 privateRouter.get("/api/datasets", DatasetController.search);
+
+// Product API
+privateRouter.post("/api/datasets/:id_dataset(\\d+)/products", ProductController.create);
+privateRouter.get("/api/datasets/:id_dataset(\\d+)/products/:id_product(\\d+)", ProductController.get);
+privateRouter.patch("/api/datasets/:id_dataset(\\d+)/products/:id_product(\\d+)", ProductController.update);
+privateRouter.delete("/api/datasets/:id_dataset(\\d+)/products/:id_product(\\d+)", ProductController.remove);
+privateRouter.get("/api/datasets/:id_dataset(\\d+)/products", ProductController.search);
+
