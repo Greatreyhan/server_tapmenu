@@ -1,6 +1,7 @@
-import { Dataset, Product } from "@prisma/client";
+import { Screen, Dataset, Product } from "@prisma/client";
 import { prismaClient } from "../src/application/database";
 import bcrypt from "bcrypt"
+
 export class UserTest{
 
     static async delete(){
@@ -105,6 +106,43 @@ export class ProductTest{
         }
 
         return dataset;
+    }
+
+}
+
+
+export class ScreenTest{
+
+    static async delete(){
+        await prismaClient.screen.deleteMany({
+            where:{
+                id_user: "test@gmail.com"
+            }
+        })
+    }
+
+    static async create(){
+        await prismaClient.screen.create({
+            data:{
+                id_user: "test@gmail.com",
+                name: "Test",
+                endpoint: "test"
+            }
+        })
+    }
+
+    static async get(): Promise<Screen>{
+        const screen = await prismaClient.screen.findFirst({
+            where:{
+                id_user: "test@gmail.com",
+            }
+        });
+
+        if(!screen){
+            throw new Error("Screen not found!")
+        }
+
+        return screen;
     }
 
 }

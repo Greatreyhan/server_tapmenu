@@ -3,6 +3,7 @@ import { authMiddleware } from "../middleware/auth-middleware";
 import { UserController } from "../controller/user-controller";
 import { DatasetController } from "../controller/dataset-controller";
 import { ProductController } from "../controller/product-controller";
+import { ScreenController } from "../controller/screen-controller";
 
 export const privateRouter = express.Router();
 privateRouter.use(authMiddleware);
@@ -13,7 +14,7 @@ privateRouter.get("/api/users", UserController.get);
 privateRouter.patch("/api/users", UserController.update);
 privateRouter.delete("/api/users", UserController.logout);
 
-// Contact API
+// Dataset API
 privateRouter.post("/api/datasets", DatasetController.create);
 privateRouter.get("/api/datasets/:id_dataset(\\d+)", DatasetController.get);
 privateRouter.patch("/api/datasets/:id_dataset(\\d+)", DatasetController.update);
@@ -27,3 +28,8 @@ privateRouter.patch("/api/datasets/:id_dataset(\\d+)/products/:id_product(\\d+)"
 privateRouter.delete("/api/datasets/:id_dataset(\\d+)/products/:id_product(\\d+)", ProductController.remove);
 privateRouter.get("/api/datasets/:id_dataset(\\d+)/products", ProductController.search);
 
+// Screen API
+privateRouter.post("/api/screens", ScreenController.create);
+privateRouter.get("/api/screens/:id_screen(\\d+)", ScreenController.get);
+privateRouter.patch("/api/screens/:id_screen(\\d+)", ScreenController.update);
+privateRouter.delete("/api/screens/:id_screen(\\d+)", ScreenController.remove);
