@@ -58,6 +58,11 @@ export type GetProductRequest = {
     id: number;
 }
 
+export type DeleteProductRequest = {
+    id_dataset: number;
+    id: number;
+}
+
 export function toProductResponse(product: Product): ProductResponse{
     return{
         id: product.id,

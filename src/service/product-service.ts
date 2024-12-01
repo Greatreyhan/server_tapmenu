@@ -1,7 +1,7 @@
 import { Product, User } from "@prisma/client";
 import { Validation } from "../validation/validation";
 import { prismaClient } from "../application/database";
-import { CreateProductRequest, GetProductRequest, ProductResponse, SearchProductRequest, toProductResponse, UpdateProductRequest } from "../model/product-model";
+import { CreateProductRequest, DeleteProductRequest, GetProductRequest, ProductResponse, SearchProductRequest, toProductResponse, UpdateProductRequest } from "../model/product-model";
 import { ProductValidation } from "../validation/product-validation";
 import { DatasetService } from "./dataset-services";
 import { ResponseError } from "../error/response-error";
@@ -59,8 +59,8 @@ export class ProductService{
         return toProductResponse(product)
     } 
 
-    static async remove(user: User, request: UpdateProductRequest): Promise<ProductResponse>{
-        const deleteRequest = Validation.validate(ProductValidation.GET, request);
+    static async remove(user: User, request: DeleteProductRequest): Promise<ProductResponse>{
+        const deleteRequest = Validation.validate(ProductValidation.DELETE, request);
         await DatasetService.checkDatasetExist(request.id_dataset, user.email)
         await this.checkProductExist(deleteRequest.id, deleteRequest.id_dataset);
 

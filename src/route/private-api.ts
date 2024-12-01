@@ -4,6 +4,7 @@ import { UserController } from "../controller/user-controller";
 import { DatasetController } from "../controller/dataset-controller";
 import { ProductController } from "../controller/product-controller";
 import { ScreenController } from "../controller/screen-controller";
+import { PageController } from "../controller/page-controller";
 
 export const privateRouter = express.Router();
 privateRouter.use(authMiddleware);
@@ -33,3 +34,9 @@ privateRouter.post("/api/screens", ScreenController.create);
 privateRouter.get("/api/screens/:id_screen(\\d+)", ScreenController.get);
 privateRouter.patch("/api/screens/:id_screen(\\d+)", ScreenController.update);
 privateRouter.delete("/api/screens/:id_screen(\\d+)", ScreenController.remove);
+
+// Page API
+privateRouter.post("/api/screens/:id_screen(\\d+)/pages", PageController.create);
+privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.get);
+privateRouter.patch("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.update);
+privateRouter.delete("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.remove);
