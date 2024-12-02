@@ -5,6 +5,7 @@ import { DatasetController } from "../controller/dataset-controller";
 import { ProductController } from "../controller/product-controller";
 import { ScreenController } from "../controller/screen-controller";
 import { PageController } from "../controller/page-controller";
+import { ElementController } from "../controller/element-controller";
 
 export const privateRouter = express.Router();
 privateRouter.use(authMiddleware);
@@ -40,3 +41,10 @@ privateRouter.post("/api/screens/:id_screen(\\d+)/pages", PageController.create)
 privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.get);
 privateRouter.patch("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.update);
 privateRouter.delete("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.remove);
+
+// Page API
+privateRouter.post("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements", ElementController.create);
+privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements/:id_element(\\d+)", ElementController.get);
+privateRouter.patch("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements/:id_element(\\d+)", ElementController.update);
+privateRouter.delete("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements/:id_element(\\d+)", ElementController.remove);
+privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements", ElementController.list);
