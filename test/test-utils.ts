@@ -1,4 +1,4 @@
-import { Screen, Dataset, Product, Page, Element } from "@prisma/client";
+import { Screen, Dataset, Product, Page, Element, DatasetsOnElements } from "@prisma/client";
 import { prismaClient } from "../src/application/database";
 import bcrypt from "bcrypt"
 
@@ -229,5 +229,51 @@ export class ElementTest{
 
         return element;
     }
+
+}
+
+
+export class DatasetOnElementTest{
+
+    static async delete(){
+        const dataset = await DatasetTest.get()
+        const element = await ElementTest.get()
+        await prismaClient.datasetsOnElements.deleteMany({
+            where:{
+                id_dataset: dataset.id,
+                id_element: element.id
+            }
+        })
+
+    }
+
+    static async create(){
+        const dataset = await DatasetTest.get()
+        const element = await ElementTest.get()
+        await prismaClient.datasetsOnElements.create({
+            data:{
+                id_dataset: dataset.id,
+                id_element: element.id
+            }
+        })
+    }
+
+    static async get(): Promise<DatasetsOnElements>{
+        const dataset = await DatasetTest.get()
+        const element = await ElementTest.get()
+        const assignment = await prismaClient.datasetsOnElements.findFirst({
+            where:{
+                id_dataset: dataset.id,
+                id_element: element.id
+            }
+        });
+
+        if(!assignment){
+            throw new Error("Assignment not found!")
+        }
+
+        return assignment;
+    }
+
 
 }

@@ -6,6 +6,7 @@ import { ProductController } from "../controller/product-controller";
 import { ScreenController } from "../controller/screen-controller";
 import { PageController } from "../controller/page-controller";
 import { ElementController } from "../controller/element-controller";
+import { DatasetOnElementController } from "../controller/element-dataset-controller";
 
 export const privateRouter = express.Router();
 privateRouter.use(authMiddleware);
@@ -48,3 +49,10 @@ privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements/:
 privateRouter.patch("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements/:id_element(\\d+)", ElementController.update);
 privateRouter.delete("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements/:id_element(\\d+)", ElementController.remove);
 privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements", ElementController.list);
+
+// DatasetOnElement API
+privateRouter.post("/api/dataset-element", DatasetOnElementController.assign);
+privateRouter.get("/api/dataset-element/:id_dataset/:id_element", DatasetOnElementController.get);
+privateRouter.get("/api/on-dataset/:id_dataset", DatasetOnElementController.getElement);
+privateRouter.get("/api/on-element/:id_element", DatasetOnElementController.getDataset);
+privateRouter.delete("/api/dataset-element/:id_dataset/:id_element", DatasetOnElementController.remove);
