@@ -51,7 +51,9 @@ export class ProductValidation{
         qty_max: z.number().min(0).optional(),
         qty_min: z.number().min(0).optional(),
         status: z.boolean().optional(),
-        type: z.nativeEnum(ProductType).optional()
+        type: z.nativeEnum(ProductType).optional(),
+        page: z.number().min(1).max(100).positive(),
+        size: z.number().min(1).max(100).positive()
     });
     
 

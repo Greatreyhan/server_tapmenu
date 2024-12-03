@@ -1,0 +1,33 @@
+###
+POST http://localhost:3000/api/screens
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: e629ff2c-9d2f-46e6-8ae2-97206b851f3a
+
+{
+    "name": "Test",
+    "endpoint": "test"
+}
+
+###
+GET http://localhost:3000/api/screens/1473
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 52c503d4-3821-4981-bae4-77093f97e188
+
+###
+PATCH http://localhost:3000/api/screens/1473
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 52c503d4-3821-4981-bae4-77093f97e188
+
+{
+    "name": "Test1",
+    "endpoint": "test1"
+}
+
+###
+DELETE http://localhost:3000/api/screens/1473
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 52c503d4-3821-4981-bae4-77093f97e188

@@ -119,7 +119,7 @@ describe("GET /api/datasets", () =>{
 
     it("Should search dataset", async() =>{
         const response = await supertest(web)
-            .get(`/api/datasets?name=Test`)
+            .get(`/api/datasets`)
             .set("X-API-TOKEN", "test")
         
         console.info(response.body)

@@ -69,7 +69,7 @@ export class UserController{
             const response = await UserService.delete(req.user!);
             res.status(200).json({
                 status: "OK",
-                message: "Success Update User",
+                message: "Success Logout User",
                 data: response
             })
         }

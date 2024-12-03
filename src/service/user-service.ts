@@ -60,7 +60,7 @@ export class UserService{
         })
 
         const response = toUserResponse(updatedUser);
-        response.token = user.token!;
+        response.token = updatedUser.token!;
         return response;
     }
 

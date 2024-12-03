@@ -1,0 +1,39 @@
+
+###
+POST http://localhost:3000/api/datasets
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 32ee9be0-190f-4289-afb3-a226f8c099a2
+
+{
+    "name": "Test"
+}
+
+###
+GET http://localhost:3000/api/datasets?name=Test
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 07940cf9-fd15-4953-8384-8de2cffaaf7d
+
+
+###
+GET http://localhost:3000/api/datasets/1912
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 07940cf9-fd15-4953-8384-8de2cffaaf7d
+
+###
+PATCH http://localhost:3000/api/datasets/1912
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 07940cf9-fd15-4953-8384-8de2cffaaf7d
+
+{
+    "name": "Test1"
+}
+
+###
+DELETE http://localhost:3000/api/datasets/1912
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 07940cf9-fd15-4953-8384-8de2cffaaf7d

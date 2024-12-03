@@ -13,7 +13,7 @@ privateRouter.use(authMiddleware);
 
 
 // USER API
-privateRouter.get("/api/users", UserController.get);
+privateRouter.get("/api/users/current", UserController.get);
 privateRouter.patch("/api/users", UserController.update);
 privateRouter.delete("/api/users", UserController.logout);
 
@@ -43,7 +43,7 @@ privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageCont
 privateRouter.patch("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.update);
 privateRouter.delete("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.remove);
 
-// Page API
+// Element API
 privateRouter.post("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements", ElementController.create);
 privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements/:id_element(\\d+)", ElementController.get);
 privateRouter.patch("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements/:id_element(\\d+)", ElementController.update);

@@ -1,0 +1,46 @@
+POST http://localhost:3000/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "test",
+    "email": "test@gmail.com",
+    "password": "test",
+    "whatsapp_number": "000000"
+}
+
+### 
+POST http://localhost:3000/api/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "test@gmail.com",
+    "password": "test"
+}
+
+###
+GET http://localhost:3000/api/users/current
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 8f3eff08-02e3-47ff-b16b-0c2e1c964fb7
+
+
+###
+PATCH http://localhost:3000/api/users
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 8f3eff08-02e3-47ff-b16b-0c2e1c964fb7
+
+{
+    "username": "tist",
+    "password": "tist",
+    "address": "tist",
+    "whatsapp_number": "999999"
+}
+
+###
+DELETE http://localhost:3000/api/users
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 07940cf9-fd15-4953-8384-8de2cffaaf7d

@@ -11,7 +11,7 @@ export class DatasetValidation{
     });
 
     static readonly SEARCH : ZodType = z.object({
-        name: z.string().min(1).max(100),
+        name: z.string().min(1).max(100).optional(),
         page: z.number().min(1).max(100).positive(),
         size: z.number().min(1).max(100).positive()
     })

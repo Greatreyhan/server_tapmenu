@@ -1,0 +1,51 @@
+###
+POST http://localhost:3000/api/datasets/1915/products
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 52c503d4-3821-4981-bae4-77093f97e188
+
+{
+    "image": "link",
+    "title": "test",
+    "description": "test",
+    "price": 1000,
+    "click": 100,
+    "qty": 10,
+    "status": true,
+    "type": "FOOD"
+}
+
+###
+GET http://localhost:3000/api/datasets/1915/products/654
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 52c503d4-3821-4981-bae4-77093f97e188
+
+###
+GET http://localhost:3000/api/datasets/1915/products
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 52c503d4-3821-4981-bae4-77093f97e188
+
+###
+PATCH http://localhost:3000/api/datasets/1915/products/654
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 52c503d4-3821-4981-bae4-77093f97e188
+
+{
+    "image": "link",
+    "title": "test1",
+    "description": "test",
+    "price": 1000,
+    "click": 100,
+    "qty": 10,
+    "status": true,
+    "type": "FOOD"
+}
+
+###
+DELETE http://localhost:3000/api/datasets/1915/products/654
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: 52c503d4-3821-4981-bae4-77093f97e188
