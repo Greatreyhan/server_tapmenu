@@ -2,9 +2,10 @@ import { Page, User } from "@prisma/client";
 import { Validation } from "../validation/validation";
 import { prismaClient } from "../application/database";
 import { ResponseError } from "../error/response-error";
-import { CreatePageRequest, DeletePageRequest, GetPageRequest, PageResponse, toPageResponse, UpdatePageRequest } from "../model/page-mode";
+import { CreatePageRequest, DeletePageRequest, GetPageRequest, PageResponse, SearchPageRequest, toPageResponse, UpdatePageRequest } from "../model/page-mode";
 import { PageValidation } from "../validation/page-validation";
 import { ScreenService } from "./screen-services";
+import { Pageable } from "../model/page";
 
 export class PageService{
 
@@ -71,6 +72,55 @@ export class PageService{
         })
 
         return toPageResponse(page)
+    }
+
+    static async search(user: User, request: SearchPageRequest): Promise<Pageable<PageResponse>> {
+        const requestSearch = Validation.validate(PageValidation.SEARCH, request);
+        let skip = (requestSearch.page - 1) * requestSearch.size;    
+        const filters = [];
+    
+        if (requestSearch.name) {
+            filters.push({
+                name: {
+                    contains: requestSearch.name,
+                },
+            });
+        }
+
+        if (requestSearch.endpoint) {
+            filters.push({
+                endpoint: {
+                    contains: requestSearch.endpoint,
+                },
+            });
+        }
+    
+        const pages = await prismaClient.page.findMany({
+            where: {
+                id_screen: request.id_screen,
+                AND: filters,
+            },
+            take: requestSearch.size ?? 10,
+            skip: (isNaN(skip)) ? 0 : skip,
+        });
+    
+        const total = await prismaClient.page.count({
+            where: {
+                id_screen: request.id_screen,
+                AND: filters,
+            },
+        });
+    
+        return {
+            status: 'OK',
+            message: 'Success search page',
+            data: pages.map((page) => toPageResponse(page)),
+            paging: {
+                current_page: requestSearch.page,
+                total_page: Math.ceil(total / requestSearch.size),
+                size: requestSearch.size,
+            },
+        };
     }
 
 }

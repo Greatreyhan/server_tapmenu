@@ -42,6 +42,7 @@ exports.privateRouter.post("/api/screens/:id_screen(\\d+)/pages", page_controlle
 exports.privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", page_controller_1.PageController.get);
 exports.privateRouter.patch("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", page_controller_1.PageController.update);
 exports.privateRouter.delete("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", page_controller_1.PageController.remove);
+exports.privateRouter.get("/api/screens/:id_screen(\\d+)/pages", page_controller_1.PageController.search);
 // Element API
 exports.privateRouter.post("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements", element_controller_1.ElementController.create);
 exports.privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements/:id_element(\\d+)", element_controller_1.ElementController.get);

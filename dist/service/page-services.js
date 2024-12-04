@@ -78,5 +78,51 @@ class PageService {
             return (0, page_mode_1.toPageResponse)(page);
         });
     }
+    static search(user, request) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            const requestSearch = validation_1.Validation.validate(page_validation_1.PageValidation.SEARCH, request);
+            let skip = (requestSearch.page - 1) * requestSearch.size;
+            const filters = [];
+            if (requestSearch.name) {
+                filters.push({
+                    name: {
+                        contains: requestSearch.name,
+                    },
+                });
+            }
+            if (requestSearch.endpoint) {
+                filters.push({
+                    endpoint: {
+                        contains: requestSearch.endpoint,
+                    },
+                });
+            }
+            const pages = yield database_1.prismaClient.page.findMany({
+                where: {
+                    id_screen: request.id_screen,
+                    AND: filters,
+                },
+                take: (_a = requestSearch.size) !== null && _a !== void 0 ? _a : 10,
+                skip: (isNaN(skip)) ? 0 : skip,
+            });
+            const total = yield database_1.prismaClient.page.count({
+                where: {
+                    id_screen: request.id_screen,
+                    AND: filters,
+                },
+            });
+            return {
+                status: 'OK',
+                message: 'Success search page',
+                data: pages.map((page) => (0, page_mode_1.toPageResponse)(page)),
+                paging: {
+                    current_page: requestSearch.page,
+                    total_page: Math.ceil(total / requestSearch.size),
+                    size: requestSearch.size,
+                },
+            };
+        });
+    }
 }
 exports.PageService = PageService;

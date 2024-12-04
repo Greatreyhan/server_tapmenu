@@ -24,6 +24,14 @@ export type  DeletePageRequest = {
     id_screen: number;
 }
 
+export type SearchPageRequest = {
+    id_screen: number;
+    name?: string;
+    endpoint?: string;
+    page: number;
+    size: number;
+}
+
 export type GetPageRequest = {
     id: number;
     id_screen: number;

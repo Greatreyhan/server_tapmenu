@@ -44,6 +44,7 @@ privateRouter.post("/api/screens/:id_screen(\\d+)/pages", PageController.create)
 privateRouter.get("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.get);
 privateRouter.patch("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.update);
 privateRouter.delete("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)", PageController.remove);
+privateRouter.get("/api/screens/:id_screen(\\d+)/pages", PageController.search);
 
 // Element API
 privateRouter.post("/api/screens/:id_screen(\\d+)/pages/:id_page(\\d+)/elements", ElementController.create);

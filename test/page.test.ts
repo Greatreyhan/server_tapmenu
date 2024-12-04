@@ -117,3 +117,30 @@ describe("DELETE /api/screens/:id_screen(\\d+)/pages/:id_pages(\\d+)t", () =>{
     })
 })
 
+describe("GET /api/screens/:id_screen(\\d+)/pages", () =>{
+
+    beforeEach(async () =>{
+        await UserTest.create()
+        await ScreenTest.create()
+        await PageTest.create()
+    })
+
+    afterEach(async () =>{
+        await PageTest.delete()
+        await ScreenTest.delete()
+        await UserTest.delete()
+    })
+
+    it("Should get page", async() =>{
+        const screen = await ScreenTest.get()
+        const page = await PageTest.get()
+        console.info(screen.id, page.id)
+        const response = await supertest(web)
+            .get(`/api/screens/${screen.id}/pages`)
+            .set("X-API-TOKEN", "test")
+        
+        console.info(response.body)
+        expect(response.status).toBe(200)
+        // expect(response.body.data.name).toBe("Test")
+    })
+})
