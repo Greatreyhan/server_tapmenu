@@ -15,7 +15,7 @@ ScreenValidation.UPDATE = zod_1.z.object({
     endpoint: zod_1.z.string().min(1).max(100).optional()
 });
 ScreenValidation.SEARCH = zod_1.z.object({
-    name: zod_1.z.string().min(1).max(100),
-    page: zod_1.z.number().min(1).max(100).positive(),
-    size: zod_1.z.number().min(1).max(100).positive()
+    name: zod_1.z.string().min(1).max(100).optional(),
+    page: zod_1.z.number().min(1).max(100).positive().optional(),
+    size: zod_1.z.number().min(1).max(100).positive().optional()
 });

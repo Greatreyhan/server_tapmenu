@@ -73,5 +73,45 @@ class ScreenService {
             return (0, screen_model_1.toScreenResponse)(screen);
         });
     }
+    static search(user, request) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const datasetSearch = validation_1.Validation.validate(screen_validation_1.ScreenValidation.SEARCH, request);
+            const skip = (datasetSearch.page - 1) * datasetSearch.size;
+            const filters = [];
+            if (datasetSearch.name) {
+                filters.push({
+                    name: {
+                        contains: datasetSearch.name
+                    }
+                });
+            }
+            const screens = yield database_1.prismaClient.screen.findMany({
+                where: {
+                    id_user: user.email,
+                    AND: filters
+                },
+                take: datasetSearch.size,
+                skip: skip
+            });
+            const total = yield database_1.prismaClient.dataset.count({
+                where: {
+                    id_user: user.email,
+                    AND: filters
+                },
+                take: datasetSearch.size,
+                skip: skip
+            });
+            return {
+                status: 'OK',
+                message: "Success search screen",
+                data: screens.map(data => (0, screen_model_1.toScreenResponse)(data)),
+                paging: {
+                    current_page: datasetSearch.page,
+                    total_page: Math.ceil(total / datasetSearch.size),
+                    size: datasetSearch.size
+                }
+            };
+        });
+    }
 }
 exports.ScreenService = ScreenService;

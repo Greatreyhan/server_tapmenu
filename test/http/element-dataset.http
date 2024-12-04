@@ -1,0 +1,37 @@
+###
+POST http://localhost:3000/api/dataset-element
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: e629ff2c-9d2f-46e6-8ae2-97206b851f3a
+
+{
+    "id_page": 1030,
+    "id_element": 628,
+    "id_dataset": 1982
+}
+
+###
+GET http://localhost:3000/api/dataset-element/1982/628
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: e629ff2c-9d2f-46e6-8ae2-97206b851f3a
+
+###
+GET http://localhost:3000/api/on-dataset/1982
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: e629ff2c-9d2f-46e6-8ae2-97206b851f3a
+
+###
+GET http://localhost:3000/api/on-element/628
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: e629ff2c-9d2f-46e6-8ae2-97206b851f3a
+
+
+###
+DELETE http://localhost:3000/api/dataset-element/1982/628
+Content-Type: application/json
+Accept: application/json
+X-API-TOKEN: e629ff2c-9d2f-46e6-8ae2-97206b851f3a
+

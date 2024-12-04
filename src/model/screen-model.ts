@@ -19,7 +19,7 @@ export type UpdateScreenRequest = {
 
 export type SearchScreenRequest = {
     name?: string;
-    endpoint: string;
+    endpoint?: string;
     page: number;
     size: number;
 }

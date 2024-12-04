@@ -36,6 +36,8 @@ privateRouter.post("/api/screens", ScreenController.create);
 privateRouter.get("/api/screens/:id_screen(\\d+)", ScreenController.get);
 privateRouter.patch("/api/screens/:id_screen(\\d+)", ScreenController.update);
 privateRouter.delete("/api/screens/:id_screen(\\d+)", ScreenController.remove);
+privateRouter.get("/api/screens", ScreenController.search);
+
 
 // Page API
 privateRouter.post("/api/screens/:id_screen(\\d+)/pages", PageController.create);

@@ -3,7 +3,7 @@ import { Validation } from "../validation/validation";
 import { prismaClient } from "../application/database";
 import { ResponseError } from "../error/response-error";
 import { Pageable } from "../model/page";
-import { CreateScreenRequest, ScreenResponse, toScreenResponse, UpdateScreenRequest } from "../model/screen-model";
+import { CreateScreenRequest, ScreenResponse, SearchScreenRequest, toScreenResponse, UpdateScreenRequest } from "../model/screen-model";
 import { ScreenValidation } from "../validation/screen-validation";
 
 export class ScreenService{
@@ -70,6 +70,50 @@ export class ScreenService{
         })
 
         return toScreenResponse(screen)
+    }
+
+    static async search(user: User, request: SearchScreenRequest): Promise<Pageable<ScreenResponse>>{
+        const datasetSearch = Validation.validate(ScreenValidation.SEARCH, request)
+        const skip = (datasetSearch.page - 1) * datasetSearch.size;
+
+        const filters = [];
+
+        if(datasetSearch.name){
+            filters.push({
+                name :{
+                    contains: datasetSearch.name
+                }
+            })
+        }
+
+        const screens = await prismaClient.screen.findMany({
+            where: {
+                id_user : user.email,
+                AND: filters
+            },
+            take : datasetSearch.size,
+            skip : skip
+        })
+
+        const total = await prismaClient.dataset.count({
+            where: {
+                id_user : user.email,
+                AND: filters
+            },
+            take : datasetSearch.size,
+            skip : skip
+        })
+
+        return {
+            status: 'OK',
+            message: "Success search screen",
+            data: screens.map(data => toScreenResponse(data)),
+            paging: {
+                current_page: datasetSearch.page,
+                total_page: Math.ceil(total/datasetSearch.size),
+                size: datasetSearch.size
+            }
+        }
     }
 
 

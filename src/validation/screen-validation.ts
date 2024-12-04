@@ -14,8 +14,8 @@ export class ScreenValidation{
     );
 
     static readonly SEARCH : ZodType = z.object({
-        name: z.string().min(1).max(100),
-        page: z.number().min(1).max(100).positive(),
-        size: z.number().min(1).max(100).positive()
+        name: z.string().min(1).max(100).optional(),
+        page: z.number().min(1).max(100).positive().optional(),
+        size: z.number().min(1).max(100).positive().optional()
     })
 }
